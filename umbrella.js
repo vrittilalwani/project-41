@@ -13,24 +13,9 @@ class Umbrella{
         var pos= this.body.position;
         push();
         var maxDrops=100;
-        for(var i=0; i<maxDrops; i++){
-            drops.push(new createDrop(random(0,400), random(0,400)));
-        }
-        image(0,0,pos.x, pos.y, this.image);
-        if (frameCount % 20 === 0) {
-            fruits = createSprite(random(100, 1000), 0, 100, 100);
-            var rand = Math.round(random(1,5));
-            switch(rand){
-                case 1: thunder.addImage("1.png");
-                break;
-                case 2: thunder.addImage("2.png");
-                break;
-                case 3: thunder.addImage("3.png");
-                break;
-                case 4: thunder.addImage("4.png");
-                break;
-            }
+        
+        image(this.image,pos.x, pos.y,0,0 );
+        
         pop();
     }
-}
 }
