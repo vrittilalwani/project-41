@@ -2,49 +2,76 @@
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
-const Body = Matter.Body;
-const Constraint=Matter.Constraint;
+var thunder, thunder1, thunder2, thunder3, thunder4;
 
-var umbrella,drop;
+var engines, world;
+var drop=[];
+var rand;
+
+var maxDrops=100;
+
+var thunderCreatedFrame=0;
 
 function preload(){
-    
+  thunder1 =  loadImage("thunderbolt/1.png");  
+  thunder2 =  loadImage("thunderbolt/2.png");
+  thunder3 =  loadImage("thunderbolt/3.png");
+  thunder4 =  loadImage("thunderbolt/4.png");
 }
 
 function setup(){
-    createCanvas(800, 700);
-engine = Engine.create();
-world = engine.world;
+    engine = Engine.create();
+    world = engine.world;
 
-umbrella = new Umbrella(100,20,50,25);
-drop= new Drops(100,25,45,125);
+    createCanvas(400, 700);
 
-Engine.run(engine);
-     
+    //creating drops
+    if(frameCount % 150 === 0){
+
+        for(var i=0; i<maxDrops; i++){
+            drops.push(new createDrop(random(0,400), random(0,400)));
+        }
+
+    }
+    
 }
 
 function draw(){
+    Engine.update(engine);
+    background(0); 
 
- umbrella.display();
- drop.display();
- 
-}
- if (frameCount % 20 === 0) {
-    thunder = createSprite(random(100, 1000), 0, 100, 100);
-    var rand = Math.round(random(1,5));
-    switch(rand){
-        case 1: thunder.addImage("1.png");
-        break;
-        case 2: thunder.addImage("2.png");
-        break;
-        case 3: thunder.addImage("3.png");
-        break;
-        case 4: thunder.addImage("4.png");
-        break;
+    //creating thunder
+    rand = Math.round(random(1,4));
+    if(frameCount%80===0){
+        thunderCreatedFrame=frameCount;
+        thunder = createSprite(random(10,370), random(10,30), 10, 10);
+        switch(rand){
+            case 1: thunder.addImage(thunder1);
+            break;
+            case 2: thunder.addImage(thunder2);
+            break; 
+            case 3: thunder.addImage(thunder3);
+            break;
+            case 4: thunder.addImage(thunder4);
+            break;
+            default: break;
+        }
+        thunder.scale = random(0.3,0.6)
     }
-    for(var i=0; i<maxDrops; i++){
-        drops.push(new createDrop(random(0,400), random(0,400)));
+
+    if(thunderCreatedFrame + 10 ===frameCount && thunder){
+        thunder.destroy();
     }
-    
-   
+
+    umbrella.display();
+
+    //displaying rain drops
+    for(var i = 0; i<maxDrops; i++){
+        drops[i].showDrop();
+        drops[i].updateY()
+        
+    }
+
+    drawSprites();
 }   
+  
