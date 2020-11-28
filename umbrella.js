@@ -3,7 +3,7 @@ class Umbrella{
         var options = {
             isStatic:true
         }
-        this.image = loadImage("images/Walking Frame/walking_1.img");
+        this.image = loadImage("images/Walking Frame/walking_5.img");
         this.umbrella = Bodies.circle(x, y,50,options);
         this.radius = 50;
         World.add(world, this.umbrella);
