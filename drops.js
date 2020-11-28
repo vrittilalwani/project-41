@@ -2,7 +2,8 @@ class Drops{
     constructor(x,y){
         var options = {
             friction:0.001,
-            restitution:0.1
+            restitution:0.1,
+            isStatic:false
         }
         this.rain = Bodies.circle(x, y,5,options);
         this.radius = 5;
@@ -10,9 +11,9 @@ class Drops{
     }
 
     updateY(){
-        if(this.rain.postion.y > height){
+        if(this.rain.position.y > height){
             
-            Matter.Body.setPosition(this.rain,  {x:RandomSource(0,400), y:RandomSource(0,400)})
+            Matter.Body.setPosition(this.rain,  {x:random(20,400), y:random(100,400)})
         }
     }
 

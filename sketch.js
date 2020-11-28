@@ -13,10 +13,10 @@ var maxDrops=100;
 var thunderCreatedFrame=0;
 
 function preload(){
-  thunder1 =  loadImage("thunderbolt/1.png");  
-  thunder2 =  loadImage("thunderbolt/2.png");
-  thunder3 =  loadImage("thunderbolt/3.png");
-  thunder4 =  loadImage("thunderbolt/4.png");
+  thunder1 =  loadImage("images/thunderbolt/1.png");  
+  thunder2 =  loadImage("images/thunderbolt/2.png");
+  thunder3 =  loadImage("images/thunderbolt/3.png");
+  thunder4 =  loadImage("images/thunderbolt/4.png");
 }
 
 function setup(){
@@ -24,12 +24,13 @@ function setup(){
     world = engine.world;
 
     createCanvas(400, 700);
+    umbrella = new Umbrella(200,500);
 
     //creating drops
     if(frameCount % 150 === 0){
 
         for(var i=0; i<maxDrops; i++){
-            drops.push(new createDrop(random(0,400), random(0,400)));
+            drop.push(new Drops(random(0,400), random(0,400)));
         }
 
     }
@@ -67,8 +68,8 @@ function draw(){
 
     //displaying rain drops
     for(var i = 0; i<maxDrops; i++){
-        drops[i].showDrop();
-        drops[i].updateY()
+        drop[i].showDrop();
+        drop[i].updateY()
         
     }
 
